@@ -16,7 +16,6 @@ void WriteImage(const char * & fname, int **fimage, int M, int N, int Q)
  image = (unsigned char *) new unsigned char [M*N];
 
  // convert the integer values to unsigned char
-
  for(i=0; i<N; i++)
    for(j=0; j<M; j++)
      image[i*M+j]=(unsigned char)fimage[i][j];
