@@ -21,13 +21,6 @@ int main( int argc, char ** argv){
 	orImage = new PGMImage(orImageFile);
 	(*orImage).gaussian(3);
 	(*orImage).write(resImageFile);
-
-	// perform 2D Gaussian convolution with 1D masks
-// //SUDO//
-// 	image = image(orImageFile)
-// 	resimage = smooth(image, argv[argc - 1].atoi())
-// 	resiamge.write(resImageFile)
-// //SUDO//
-
+	
 	return 0;
 }

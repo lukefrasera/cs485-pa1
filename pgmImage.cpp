@@ -16,6 +16,7 @@ PGMImage::PGMImage(){
 	w = 0;
 	h = 0;
 	q = 0;
+	gM = NULL;
 }
 PGMImage::~PGMImage(){
 	if(image != NULL){
@@ -29,13 +30,8 @@ bool PGMImage::write(const char * & filename){
 	WriteImage(filename, image, w, h, q);
 }
 PGMImage * PGMImage::gaussian(int maskSize){
-	for(int i = 0; i < h; i++){
-		for( int j = 0; j < w; j++){
-			image[i][j] *= 1.3;
-			if(image[i][j] > 255)
-				image[i][j] = 255;
-		}
-	}
+	
+	gM = new float[maskSize];
 	return this;
 }
 

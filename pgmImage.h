@@ -9,4 +9,5 @@ public:
 	//members
 	int ** image;
 	int w,h,q;
+	float * gM;
 };
