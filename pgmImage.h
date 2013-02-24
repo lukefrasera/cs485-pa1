@@ -5,6 +5,8 @@ public:
 	~PGMImage();
 	bool write(const char * &);
 	PGMImage * gaussian(int );
+	PGMImage * convolve(float *, int size);
+	void setImage( int **, int, int, int);
 
 	//members
 	int ** image;

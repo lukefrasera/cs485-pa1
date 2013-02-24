@@ -13,14 +13,21 @@ using namespace cv;
 int main( int argc, char ** argv){
 	// define variables
 	const char * orImageFile = argv[1];
+	int maskSize = atoi(argv[2]);
 	const char * resImageFile = "result.pgm";
 
 	PGMImage * orImage;
 	PGMImage * resImage;
 
 	orImage = new PGMImage(orImageFile);
-	(*orImage).gaussian(3);
-	(*orImage).write(resImageFile);
-	
+
+	if( maskSize%2 != 1 ){
+		cout << "-Error: Mask size must be odd-" << endl;
+	}
+	else{
+		resImage = (*orImage).gaussian(maskSize);
+		(*resImage).write(resImageFile);
+	}
+
 	return 0;
 }
