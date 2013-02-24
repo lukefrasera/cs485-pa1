@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include "pgmImage.h"
 #include <iostream>
-#include "opencv2/core/core.hpp"
 #include "opencv2/imgproc/imgproc.hpp"
 #include "opencv2/highgui/highgui.hpp"
 
@@ -23,12 +22,15 @@ int main( int argc, char ** argv){
 	PGMImage * orImage;
 	PGMImage * resImage;
 	PGMImage * cvResImage;
+	Size kernel;
 	Mat cvImage = imread(orImageFile, CV_LOAD_IMAGE_UNCHANGED);
 	Mat cvImage2;
 
-	cvsmooth(cvImage, cvImage2, CV_GAUSSIAN, 3, 3);
+	kernel.width = maskSize;
+	kernel.height = maskSize;
+	GaussianBlur(cvImage, cvImage2, kernel, 0);
 
-	imwrite( cvResImageFile, cvImage);
+	imwrite( cvResImageFile, cvImage2);
 	
 
 	orImage = new PGMImage(orImageFile);
