@@ -33,7 +33,7 @@ bool PGMImage::write(const char * & filename){
 }
 PGMImage * PGMImage::gaussian(int maskSize){
 	gM = new float[maskSize];
-	float s = (float)maskSize / 5;
+	float s = (float)maskSize / 5.0;
 	Gauss(s, maskSize, gM);
 
 	//Convolve Image with Mask
@@ -86,7 +86,7 @@ PGMImage * PGMImage::convolve(float * mask, int size){
 	for( int i = 0; i < h; i++)
 		for( int j = 0; j < w; j++ )
 			resImage[i][j] = (float)conxImage[i][j];
-		
+
 	result->setImage(resImage, w,h,q);
 	return result;
 }

@@ -1,9 +1,11 @@
 
 #include <fstream>
 #include <stdlib.h>
-#include "opencv/cv.h"
 #include "pgmImage.h"
 #include <iostream>
+#include "opencv2/core/core.hpp"
+#include "opencv2/imgproc/imgproc.hpp"
+#include "opencv2/highgui/highgui.hpp"
 
 using namespace std;
 using namespace cv;
@@ -13,11 +15,21 @@ using namespace cv;
 int main( int argc, char ** argv){
 	// define variables
 	const char * orImageFile = argv[1];
-	int maskSize = atoi(argv[2]);
 	const char * resImageFile = "result.pgm";
+	const char * cvResImageFile = "cvResult.pgm";
+
+	int maskSize = atoi(argv[2]);
 
 	PGMImage * orImage;
 	PGMImage * resImage;
+	PGMImage * cvResImage;
+	Mat cvImage = imread(orImageFile, CV_LOAD_IMAGE_UNCHANGED);
+	Mat cvImage2;
+
+	cvsmooth(cvImage, cvImage2, CV_GAUSSIAN, 3, 3);
+
+	imwrite( cvResImageFile, cvImage);
+	
 
 	orImage = new PGMImage(orImageFile);
 
@@ -28,6 +40,10 @@ int main( int argc, char ** argv){
 		resImage = (*orImage).gaussian(maskSize);
 		(*resImage).write(resImageFile);
 	}
+	delete orImage;
+	delete resImage;
+
+	// cvImage = imread(orImageFile, CV_LOAD_IMAGE_UNCHANGED);
 
 	return 0;
 }
